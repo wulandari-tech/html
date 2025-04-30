@@ -23,8 +23,7 @@ html
               td(class="border px-4 py-2")= request.message
               td(class="border px-4 py-2")= request.templateType
               td(class="border px-4 py-2")
-                button(onclick=`reply('${request.email}', '${request.message.replace(/'/g,"'")}', '${JSON.stringify(request).replace(/'/g, "'")}')`, class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline text-xs") Reply
-
+                button(onclick=`reply('${request.email}', '${request.message.replace(/'/g,"\\'")}', '${JSON.stringify(request).replace(/'/g, "\\'")}')`, class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline text-xs") Reply
 
       form(id='replyForm', method='post', action='/admin/reply', class='hidden')
         input(type='hidden', name='recipientEmail', id='recipientEmail')      
