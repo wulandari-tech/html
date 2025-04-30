@@ -2,7 +2,7 @@ doctype html
 html
   head
     title Request Template
-    style.
+style.
       body {
         font-family: sans-serif;
         background-color: #e0f2f7;
