@@ -23,19 +23,22 @@ html
               td(class="border px-4 py-2")= request.message
               td(class="border px-4 py-2")= request.templateType
               td(class="border px-4 py-2")
-                button(onclick=`reply('${request.email}', '${request.message.replace(/'/g,"\\'")}', '${JSON.stringify(request).replace(/'/g, "\\'")}')`, class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline text-xs") Reply
+                button(onclick=`reply('${request.email}', '${encodeURIComponent(request.message)}', '${encodeURIComponent(JSON.stringify(request))}')`, class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline text-xs") Reply
 
       form(id='replyForm', method='post', action='/admin/reply', class='hidden')
         input(type='hidden', name='recipientEmail', id='recipientEmail')      
         textarea(name='replyMessage', id="replyMessage",  class='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline')      
         input(type='hidden', name='originalMessage', id='originalMessage')      
         button(type='submit', class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4") Kirim Balasan
-
+script(src='/js/admin.js')
     script.
       function reply(email, message, originalRequest) {
-        document.getElementById('recipientEmail').value = email;
-        document.getElementById('replyMessage').innerText = message;
-        document.getElementById('originalMessage').value = originalRequest;
-        document.getElementById('replyForm').classList.remove('hidden');
+    const decodedMessage = decodeURIComponent(message);
+    const decodedRequest = JSON.parse(decodeURIComponent(originalRequest));
 
-      }
+
+  document.getElementById('recipientEmail').value = email;
+  document.getElementById('replyMessage').innerText = decodedMessage;
+  document.getElementById('originalMessage').value = originalRequest;
+    document.getElementById('replyForm').classList.remove('hidden');
+}
