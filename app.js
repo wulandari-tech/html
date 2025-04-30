@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const nodemailer = require('nodemailer');
 const app = express();
 const indexRouter = require('./routes/index');
 const adminRouter = require('./routes/admin');
