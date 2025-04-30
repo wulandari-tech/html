@@ -31,14 +31,19 @@ module.exports = (transporter) => {
     }
   }
 
-  router.post('/reply', async (req, res) => {
+    router.post('/reply', async (req, res) => {
     try {
+        console.log(req.body) //tambahkan ini
       const result = await sendReply(req.body.recipientEmail, req.body.replyMessage, JSON.parse(req.body.originalMessage), transporter);
+
+
+      console.log(JSON.parse(req.body.originalMessage)) //tambahkan ini
+
       res.send(result);
     } catch (error) {
+         console.log(error) //dan ini
       res.status(500).send("Terjadi kesalahan");
     }
   });
-
   return router;
 };

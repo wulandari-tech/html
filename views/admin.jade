@@ -2,35 +2,34 @@ doctype html
 html
   head
     title Admin Dashboard
-    link(rel='stylesheet', href='/css/style.css')
-    script(src='/js/admin.js')
-  body(class='bg-gray-100 font-sans')
-    .container(class="mx-auto px-4 py-8")
-      h1(class="text-3xl font-bold mb-4 text-center") Admin Dashboard
+    style.
+      body {
+        font-family: sans-serif;
+        background-color: #f0f0f0;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f5f5f5;
+      }
+      .hidden{
+        display: none;
+      }
 
-      table(class="w-full border-collapse")
-        thead
-          tr
-            th(class="border px-4 py-2 font-bold text-left bg-gray-200") Name
-            th(class="border px-4 py-2 font-bold text-left bg-gray-200") Email
-            th(class="border px-4 py-2 font-bold text-left bg-gray-200") Message
-            th(class="border px-4 py-2 font-bold text-left bg-gray-200") Template Type
-            th(class="border px-4 py-2 font-bold text-left bg-gray-200") Action
-        tbody
-          each request in requests
-            tr
-              td(class="border px-4 py-2")= request.name
-              td(class="border px-4 py-2")= request.email
-              td(class="border px-4 py-2")= request.message
-              td(class="border px-4 py-2")= request.templateType
-              td(class="border px-4 py-2")
-                button(onclick=`reply('${request.email}', '${encodeURIComponent(request.message)}', '${encodeURIComponent(JSON.stringify(request))}')`, class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline text-xs") Reply
-
-      form(id='replyForm', method='post', action='/admin/reply', class='hidden')
-        input(type='hidden', name='recipientEmail', id='recipientEmail')      
-        textarea(name='replyMessage', id="replyMessage",  class='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline')      
-        input(type='hidden', name='originalMessage', id='originalMessage')      
-        button(type='submit', class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4") Kirim Balasan
+      /* Tambahkan style lain yang dibutuhkan di sini */
 
     script.
       function reply(email, message, originalRequest) {
@@ -41,3 +40,30 @@ html
         document.getElementById('originalMessage').value = originalRequest;
         document.getElementById('replyForm').classList.remove('hidden');
       }
+  body
+    .container
+      h1 Admin Dashboard
+
+      table
+        thead
+          tr
+            th Name
+            th Email
+            th Message
+            th Template Type
+            th Action
+        tbody
+          each request in requests
+            tr
+              td= request.name
+              td= request.email
+              td= request.message
+              td= request.templateType
+              td
+                button(onclick=`reply('${request.email}', '${encodeURIComponent(request.message)}', '${encodeURIComponent(JSON.stringify(request))}')`) Reply
+
+      form(id='replyForm', method='post', action='/admin/reply', class='hidden')
+        input(type='hidden', name='recipientEmail', id='recipientEmail')      
+        textarea(name='replyMessage', id="replyMessage")      
+        input(type='hidden', name='originalMessage', id='originalMessage')      
+        button(type='submit') Kirim Balasan
