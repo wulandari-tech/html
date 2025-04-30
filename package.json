@@ -1,0 +1,21 @@
+{
+  "name": "request-website",
+  "version": "1.0.0",
+  "description": "Website for requesting templates",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.14",
+    "express": "^4.18.2",
+    "jade": "^1.11.0",
+    "mongoose": "^8.14.1",
+    "nodemailer": "^6.9.4",
+    "postcss": "^8.4.27",
+    "tailwindcss": "^3.3.3"
+  },
+   "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

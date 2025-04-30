@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+  @apply bg-gray-100 font-sans;
+}
+
+.container {
+  @apply mx-auto px-4 py-8;
+}
+
+h1 {
+  @apply text-3xl font-bold mb-4 text-center;
+}
+
+form {
+  @apply bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4;
+}
+
+
+.mb-4 {
+  @apply mb-4;
+}
+
+label {
+  @apply block text-gray-700 text-sm font-bold mb-2;
+}
+
+
+input[type="text"],
+input[type="email"],
+select,
+textarea {
+  @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline;
+}
+
+button[type="submit"] {
+  @apply bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline;
+}
+
+
+table {
+  @apply w-full border-collapse;
+}
+
+
+th, td {
+ @apply border px-4 py-2;
+}
+
+th {
+ @apply font-bold text-left bg-gray-200
+}
+
+
+/* Tambahkan style khusus lainnya di sini jika diperlukan */
+
+/* Style untuk form reply di admin dashboard */
+
+#replyForm{
+  @apply hidden
+}
