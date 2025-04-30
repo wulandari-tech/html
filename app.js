@@ -3,8 +3,7 @@ const path = require('path');
 const app = express();
 const indexRouter = require('./routes/index');
 const adminRouter = require('./routes/admin');
-const { sendReply } = require('./email/email'); // Import fungsi sendReply
-
+const { sendReply } = require('./email/email');
 
 // Konfigurasi view engine
 app.set('view engine', 'jade');
