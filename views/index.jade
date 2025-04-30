@@ -1,29 +1,62 @@
 doctype html
 html
   head
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
     title Request Template
-    link(rel='stylesheet', href='/css/style.css')
-  body(class="bg-gray-100 font-sans")
-    .container(class="mx-auto px-4 py-8")
-      h1(class="text-3xl font-bold mb-4 text-center") Request a Template
+    style.
+      body {
+        font-family: sans-serif;
+        background-color: #e0f2f7; /* Warna latar belakang biru muda */
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      form {
+        background-color: #fff;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      label {
+        display: block;
+        margin-bottom: 8px;
+      }
+      input, select, textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 16px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
 
-      form(action="/request", method="POST", class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4")
-        .mb-4
-          label(for="name", class="block text-gray-700 text-sm font-bold mb-2") Name:
-          input(type="text", id="name", name="name", required='',class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline")
 
-        .mb-4
-          label(for="email", class="block text-gray-700 text-sm font-bold mb-2") Email:
-          input(type="email", id="email", name="email", required='',class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline")
-          
-        .mb-4
-          label(for='message', class='block text-gray-700 text-sm font-bold mb-2') Message:
-          textarea(id='message', name='message', rows='4', required='', class='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline')
+      input[type="submit"] {
+        padding: 10px 15px;
+        background-color: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 10px;
+      }
 
-        .mb-4
-          label(for="templateType", class="block text-gray-700 text-sm font-bold mb-2") Template Type:
-          select(id="templateType", name="templateType", required='',class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline")
-            option(value="website") Website
-            option(value="landingPage") Landing Page
 
-        button(type="submit", class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline") Submit Request
+
+  body
+    .container
+      h1 Request a Template
+      form(action="/request", method="POST")
+        label(for="name") Name:
+        input(type="text", id="name", name="name", required)
+        label(for="email") Email:
+        input(type="email", id="email", name="email", required)
+         label(for='message') Message:
+          textarea(id='message', name='message', rows='4', required)
+        label(for="templateType") Template Type:
+        select(id="templateType", name="templateType", required)
+          option(value="website") Website
+          option(value="landingPage") Landing Page
+        input(type="submit", value="Submit Request")

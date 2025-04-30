@@ -1,7 +1,10 @@
-doctype html
+  doctype html
 html
   head
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
     title Admin Dashboard
+    style.
+
     style.
       body {
         font-family: sans-serif;
@@ -63,19 +66,6 @@ html
         cursor: pointer;
         margin-top: 10px;
       }
-    script.
-      function reply(email, message, originalRequest) {
-        const decodedMessage = decodeURIComponent(message);
-        const decodedRequest = JSON.parse(decodeURIComponent(originalRequest));
-        document.getElementById('recipientEmail').value = email;
-        document.getElementById('replyMessage').innerText = decodedMessage;
-        document.getElementById('originalMessage').value = originalRequest;
-        document.getElementById(`replyForm-${decodedRequest._id}`).classList.remove('hidden');
-      }
-      function showReplyForm(requestId) {
-        document.getElementById(`replyForm-${requestId}`).classList.remove('hidden');
-      }
-
   body
     .container
       h1 Admin Dashboard
@@ -91,3 +81,17 @@ html
             input(type='hidden', name='originalMessage', value=`${encodeURIComponent(JSON.stringify(request))}`)      
             input(type='submit', value="Kirim")
           button(onclick=`showReplyForm('${request._id}')`) Reply
+
+
+    script.
+      function showReplyForm(requestId) {
+        document.getElementById(`replyForm-${requestId}`).classList.remove('hidden');
+      }
+       function reply(email, message, originalRequest) {
+        const decodedMessage = decodeURIComponent(message);
+        const decodedRequest = JSON.parse(decodeURIComponent(originalRequest));
+        document.getElementById('recipientEmail').value = email;
+        document.getElementById('replyMessage').innerText = decodedMessage;
+        document.getElementById('originalMessage').value = originalRequest;
+        document.getElementById(`replyForm-${decodedRequest._id}`).classList.remove('hidden');
+      }
