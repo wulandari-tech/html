@@ -16,7 +16,7 @@ module.exports = (transporter) => {
 
   async function sendReply(recipientEmail, replyMessage, originalMessage, transporter) {
     const mailOptions = {
-      from: '"Nama Admin" <emailkamu@gmail.com>', // Ganti dengan email dan nama kamu
+      from: '"Admin" <wanzofc.tech@gmail.com>', // Ganti dengan email dan nama kamu
       to: recipientEmail,
       subject: `Re: ${originalMessage.subject}`,
       html: `<h1>Reply</h1><p>Original Message:</p><p>From: ${originalMessage.name}</p><p>Email: ${originalMessage.email}</p><p>Message: ${originalMessage.message}</p><br/><p>Reply Message:</p><p>${replyMessage}</p>`
@@ -31,19 +31,20 @@ module.exports = (transporter) => {
     }
   }
 
-    router.post('/reply', async (req, res) => {
+  router.post('/reply', async (req, res) => {
     try {
-        console.log(req.body) //tambahkan ini
-      const result = await sendReply(req.body.recipientEmail, req.body.replyMessage, JSON.parse(req.body.originalMessage), transporter);
+      console.log(req.body)
+          const decodedOriginalMessage = decodeURIComponent(req.body.originalMessage);
+      const result = await sendReply(req.body.recipientEmail, req.body.replyMessage, JSON.parse(decodedOriginalMessage), transporter);
+          console.log(JSON.parse(decodedOriginalMessage))
 
-
-      console.log(JSON.parse(req.body.originalMessage)) //tambahkan ini
 
       res.send(result);
     } catch (error) {
-         console.log(error) //dan ini
+         console.log(error)
       res.status(500).send("Terjadi kesalahan");
     }
   });
+
   return router;
 };

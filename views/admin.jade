@@ -25,12 +25,23 @@ html
       th {
         background-color: #f5f5f5;
       }
-      .hidden{
+      .hidden {
         display: none;
       }
+      .card {
+        background-color: #fff;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+       .card form{
+        @apply flex flex-col
+      }
 
-      /* Tambahkan style lain yang dibutuhkan di sini */
-
+      .card form textarea{
+        @apply mt-2
+      }
     script.
       function reply(email, message, originalRequest) {
         const decodedMessage = decodeURIComponent(message);
@@ -38,32 +49,24 @@ html
         document.getElementById('recipientEmail').value = email;
         document.getElementById('replyMessage').innerText = decodedMessage;
         document.getElementById('originalMessage').value = originalRequest;
-        document.getElementById('replyForm').classList.remove('hidden');
+        document.getElementById(`replyForm-${decodedRequest._id}`).classList.remove('hidden');
       }
+      function showReplyForm(requestId) {
+        document.getElementById(`replyForm-${requestId}`).classList.remove('hidden');
+      }
+
   body
     .container
       h1 Admin Dashboard
 
-      table
-        thead
-          tr
-            th Name
-            th Email
-            th Message
-            th Template Type
-            th Action
-        tbody
-          each request in requests
-            tr
-              td= request.name
-              td= request.email
-              td= request.message
-              td= request.templateType
-              td
-                button(onclick=`reply('${request.email}', '${encodeURIComponent(request.message)}', '${encodeURIComponent(JSON.stringify(request))}')`) Reply
-
-      form(id='replyForm', method='post', action='/admin/reply', class='hidden')
-        input(type='hidden', name='recipientEmail', id='recipientEmail')      
-        textarea(name='replyMessage', id="replyMessage")      
-        input(type='hidden', name='originalMessage', id='originalMessage')      
-        button(type='submit') Kirim Balasan
+      each request in requests
+        .card
+          p From: #{request.name} (#{request.email})
+          p Subject: #{request.subject}
+          p Message: #{request.message}
+          form(id=`replyForm-${request._id}`, method='post', action='/admin/reply', class='hidden')
+            input(type='hidden', name='recipientEmail', value=`${request.email}`)      
+            textarea(name='replyMessage', placeholder='Tulis balasan...', id=`replyMessage-${request._id}`)      
+            input(type='hidden', name='originalMessage', value=`${encodeURIComponent(JSON.stringify(request))}`)      
+            button(type='submit') Kirim Balasan
+          button(onclick=`showReplyForm('${request._id}')`) Reply
