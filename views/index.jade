@@ -6,7 +6,7 @@ html
     style.
       body {
         font-family: sans-serif;
-        background-color: #e0f2f7; /* Warna latar belakang biru muda */
+        background-color: #e0f2f7;
       }
       .container {
         max-width: 800px;
@@ -31,8 +31,6 @@ html
         border-radius: 4px;
         box-sizing: border-box;
       }
-
-
       input[type="submit"] {
         padding: 10px 15px;
         background-color: #2196F3;
@@ -42,9 +40,6 @@ html
         cursor: pointer;
         margin-top: 10px;
       }
-
-
-
   body
     .container
       h1 Request a Template
@@ -52,9 +47,9 @@ html
         label(for="name") Name:
         input(type="text", id="name", name="name", required)
         label(for="email") Email:
-        input(type="email", id="email", name="email", required)
-         label(for='message') Message:
-          textarea(id='message', name='message', rows='4', required)
+        input(type="email", id="email", name="email", required)  // Perbaikan di sini
+        label(for='message') Message:
+        textarea(id='message', name='message', rows='4', required)
         label(for="templateType") Template Type:
         select(id="templateType", name="templateType", required)
           option(value="website") Website
