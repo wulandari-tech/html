@@ -16,7 +16,7 @@ async function sendReply(recipientEmail, replyMessage, originalMessage) {
      const mailOptions = {
         from: 'ADMIN" <wanzofc.tech@gmail.com>',
         to: recipientEmail,
-        subject: `Re: ${originalMessage.subject}`, /
+        subject: `Re: ${originalMessage.subject}`,
         html: `<h1>Reply</h1><p>Original Message:</p><p>From: ${originalMessage.name}</p><p>Email: ${originalMessage.email}</p><p>Message: ${originalMessage.message}</p><br/><p>Reply Message:</p><p>${replyMessage}</p>` //
       };
 
